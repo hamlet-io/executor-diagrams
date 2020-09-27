@@ -1,0 +1,263 @@
+{
+    "diagramName":"Graph2",
+
+    "groups":[
+        {
+            "groupID":"Public",
+            "parentID":""
+        },
+
+        {
+            "groupID":"Client",
+            "parentID":"Public"
+        },
+
+        {
+            "groupID":"Dept",
+            "parentID":""
+        },
+
+        {
+            "groupID":"Bio Security Officer",
+            "parentID":"Dept"
+        },
+
+        {
+            "groupID":"Delegated Officer",
+            "parentID":"Dept"
+        },
+
+        {
+            "groupID":"Department SAML SSO",
+            "parentID":"Dept"
+        },
+
+        {
+            "groupID":"AWS Cloud",
+            "parentID":""
+        },
+
+        {
+            "groupID":"Management App",
+            "parentID":"AWS Cloud"
+        },
+
+        {
+            "groupID":"Management Services",
+            "parentID":"AWS Cloud"
+        },
+
+        {
+            "groupID":"Mobile Updates",
+            "parentID":"AWS Cloud"
+        },
+
+        {
+            "groupID":"Management Database",
+            "parentID":"AWS Cloud"
+        }
+    ],
+
+    "Entities":[
+        {
+            "entityID":"pUser",
+            "groupID":"Client",
+            "type":"User",
+            "entityName":"",
+
+            "pointTo":[""],
+
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"pDevice",
+            "groupID":"Client",
+            "type":"Client",
+            "entityName":"",
+
+            "pointTo":["elb"],
+
+            "edgeStyle":[""],
+            "edgeLabel":["Client Submits a Permit Application"],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"bsoUser",
+            "groupID":"Bio Security Officer",
+            "type":"User",
+            "entityName":"",
+
+            "pointTo":[""],
+
+            "edgeStyle":"",
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"bsoDevice",
+            "groupID":"Bio Security Officer",
+            "type":"Mobile",
+            "entityName":"",
+            
+            "pointTo":["elb","s3"],
+            
+            "edgeStyle":[""],
+            "edgeLabel":["BioSecurity Officer Conduct the inspection and submits the results"],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"doUser",
+            "groupID":"Delegated Officer",
+            "type":"User",
+            "entityName":"",
+
+            "pointTo":["tradicionalServer"],
+
+            "edgeStyle":[""],
+            "edgeLabel":["Delegated Officer uses departmental SSO to access system"],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"doDevice",
+            "groupID":"Delegated Officer",
+            "type":"Client",
+            "entityName":"",
+
+            "pointTo":["elb"],
+            
+            "edgeStyle":[""],
+            "edgeLabel":["Delegated Officer Assesses the application and inspection results"],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"tradicionalServer",
+            "groupID":"Department SAML SSO",
+            "type":"TradicionalServer",
+            "entityName":"",
+
+            "pointTo":[""],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"genericSamlToken",
+            "groupID":"Department SAML SSO",
+            "type":"GenericSamlToken",
+            "entityName":"",
+
+            "pointTo":[""],
+
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"elb",
+            "groupID":"Management App",
+            "type":"ElasticLoadBalancing",
+            "entityName":"Load Balancer",
+
+            "pointTo":["maECS"],
+
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"maECS",
+            "groupID":"Management App",
+            "type":"ECS",
+            "entityName":"ECS Container",
+
+            "pointTo":["elasticacheForRedis"],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+
+
+        {
+            "entityID":"msECS1",
+            "groupID":"Management Services",
+            "type":"ECS",
+            "entityName":"ECS Container",
+
+            "pointTo":["elasticacheForRedis","pDevice","bsoDevice","doDevice"],
+
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"msECS2",
+            "groupID":"Management Services",
+            "type":"ECS",
+            "entityName":"ECS Container",
+
+            "pointTo":["elasticacheForRedis","simpleEmailServiceSes"],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"simpleEmailServiceSes",
+            "groupID":"Management Services",
+            "type":"SimpleEmailServiceSes",
+            "entityName":"Simple Email Service",
+
+            "pointTo":[""],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"s3",
+            "groupID":"Mobile Updates",
+            "type":"S3",
+            "entityName":"S3 Bucket",
+
+            "pointTo":[""],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+
+        {
+            "entityID":"elasticacheForRedis",
+            "groupID":"Management Database",
+            "type":"Elasticache",
+            "entityName":"Elasticache for Redis",
+
+            "pointTo":[""],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        },
+        {
+            "entityID":"mdRDS",
+            "groupID":"Management Database",
+            "type":"RDS",
+            "entityName":"Relational Database Service for Postgres",
+
+            "pointTo":[""],
+            
+            "edgeStyle":[""],
+            "edgeLabel":[""],
+            "edgeColor":[""]
+        }
+    ]
+}

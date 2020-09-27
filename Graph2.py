@@ -2,7 +2,6 @@ from diagrams import Cluster, Diagram, Edge
 from diagrams.generic.device import Tablet, Mobile
 from diagrams.generic.blank import Blank
 from diagrams.onprem.client import Client, User
-
 # aws resources
 from diagrams.aws.compute import ECS
 from diagrams.aws.storage import S3
@@ -12,7 +11,7 @@ from diagrams.aws.network import ElasticLoadBalancing
 from diagrams.aws.database import RDS, Elasticache
 
 with Diagram("Graph2", show=True, outformat="png"):
-
+    #STEP1:set up groups and entities
     with Cluster("Public"):
         with Cluster("Client"):
             pUser = User("")
@@ -49,24 +48,22 @@ with Diagram("Graph2", show=True, outformat="png"):
             #bl = Blank(" ")
             mdRDS = RDS("Relational Database Service for Postgres")
     
-    #format within Public section
+
+
+    #STEP2:set up relationships
+    #format entities within one group
     pUser - Edge(color="transparent") - pDevice
-    #format within Dept section
     bsoUser - Edge(color="transparent") - bsoDevice
     doUser - Edge(color="transparent") - doDevice
     tradicionalServer - Edge(color="transparent") - genericSamlToken
-    #format within Management App
-    elb >> Edge(style="dashed") >> maECS
-    #format within Management Services
     msECS1 - Edge(color="transparent") - msECS2
-    msECS2 >> Edge(style="dashed") >> simpleEmailServiceSes
-    #format within Management Database
     elasticacheForRedis - Edge(color="transparent") - mdRDS
-    msECS2 >> Edge(style="dashed", label= "Feed provided to all \n users using email ") >> simpleEmailServiceSes
-    
-    #connect between sections
+
+    #connect between entities
+    #default color
+    msECS2 >> Edge(style="dashed", label= "Feed provided to all \n users using email") >> simpleEmailServiceSes
+    elb >> Edge(style="dashed") >> maECS
     #yellow: Feedback
-    
     #orange: Submission
     pDevice >> Edge(color = "#C55A11", label= "Client Submits a \n Permit Application") >> elb
     #green: Inspection
@@ -76,11 +73,9 @@ with Diagram("Graph2", show=True, outformat="png"):
     doDevice >> Edge(color="#4472C4", label= "Delegated Officer Assesses \n the application and \n inspection results") >> elb 
     #gray dashed: System Processes
     bsoDevice >> Edge(style="dashed", label= "BioSecurity Officer mobile \n app retrieves latest application \n version from the update store") >> s3
-
     maECS >> Edge(style="dashed") >> elasticacheForRedis
     msECS1 >> Edge(style="dashed") >> elasticacheForRedis
     msECS2 >> Edge(style="dashed") >> elasticacheForRedis
-    
     msECS1 >> Edge(color = "#FFC000") >> pDevice 
     msECS1 >> Edge(color = "#FFC000") >> bsoDevice
     msECS1 >> Edge(color = "#FFC000") >> doDevice
