@@ -23,7 +23,8 @@ from diagrams.aws.storage import ElasticFileSystemEFS
 from diagrams.aws.network import CloudMap, CloudFront
 from diagrams.aws.integration import ConsoleMobileApplication, SimpleNotificationServiceSns
 
-with Diagram("Graph7", show=True, outformat="png"):
+
+with Diagram("Graph7", show=True, outformat="png", direction="TB"):
 
     with Cluster("Azure AD"):
         with Cluster("Mobile App Authentication Domain"):
@@ -101,7 +102,7 @@ with Diagram("Graph7", show=True, outformat="png"):
             
 
     #format within Airports
-    aUser - Edge(color="transparent") - aDevice
+    aUser - Edge(color="red", style="invis") - aDevice
     #format within Dept Offices
     doUser1 - Edge(color="transparent") - doDevice1
     doUser2 - Edge(color="transparent") - doDevice2
