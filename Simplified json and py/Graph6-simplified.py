@@ -21,8 +21,8 @@ from diagrams.aws.storage import ElasticFileSystemEFS
 from diagrams.aws.network import CloudMap
 from diagrams.aws.integration import ConsoleMobileApplication
 
-with Diagram("Graph6", show=True, outformat="png"):
-#STEP1:set up groups and entities
+with Diagram("Graph6-simplified", show=True, outformat="png"):
+    #STEP1:set up groups and entities
     with Cluster("GoSource"):
         gsIamUser = IdentityAndAccessManagementIamAWSSts("AWS IAM User")
         gsServer = TradicionalServer("MacOS Build Server")
@@ -69,30 +69,15 @@ with Diagram("Graph6", show=True, outformat="png"):
                 sdRDS = RDS("Relational Database Service for Postgres")
             
 
-
-#STEP2:set up relationships
-    #format entities within one group
-    gsIamUser - Edge(color="transparent") - gsServer
-    genericSamlToken - Edge(color="transparent") - codeRepo
-    aaCloud - Edge(color="transparent") - aaCli
-    ses - Edge(color="transparent") - sasECS1
-    sasECS2 - Edge(color="transparent") - sasECS3
-    sasECS1 - Edge(color="transparent") - rcECS1 - Edge(color="transparent") - s3 - Edge(color="transparent") - sdRDS
-
-    #connect between entities
-    #orange: Jenkins CI/CD
-    gsServer >> Edge(color = "#C55A11", label= "If the code is for a mobile app \n the build is performed on \n Apple MacOS build service") << jsECS
-    jcpELB >> Edge(color = "#C55A11") >> jsECS
-    jsECS >> Edge(color = "#C55A11", label= "Jenkins provisions a \n worker to build, \n test code") << jawECS2
-    #jsECS >> Edge() << jawECS2
-
-    jawECS3 >> Edge(color = "#C55A11", label= "Worker agent \n deploys code to \n product accounts") >> aaCloud
-    codeRepo >> Edge(color = "#C55A11", label= "Github Notifies \n Jenkins of code change") >> jsECS
-    adUser >> Edge(color = "#C55A11", label= "Developer Commits code to \n a Source code Repository") >> codeRepo
-    #yellow: Developer Consoles
-    adUser >> Edge(color = "#FFC000") >> genericSamlToken
-    adUser >> Edge(color = "#FFC000") >> jcpELB
-    adUser >> Edge(color = "#FFC000", label= "Developers Access consoles \n using Github Auth") >> semELB
-    #blue: Sentry Reporting
-    ses >> Edge(color = "#00B0F0", label= "Sentry Emails or sends slack \n messages to developers") >> adUser
-    aaDpA >> Edge(color = "#00B0F0", label= "Applications report \n exceptions to sentry") >> rcECS1
+    #STEP2:set up relationships
+    gsServer >> Edge() << jsECS
+    jcpELB >> Edge() >> jsECS
+    jsECS >> Edge() << jawECS2
+    jawECS3 >> Edge() >> aaCloud
+    codeRepo >> Edge() >> jsECS
+    adUser >> Edge() >> codeRepo
+    adUser >> Edge() >> genericSamlToken
+    adUser >> Edge() >> jcpELB
+    adUser >> Edge() >> semELB
+    ses >> Edge() >> adUser
+    aaDpA >> Edge() >> rcECS1
