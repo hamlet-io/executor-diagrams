@@ -1,0 +1,78 @@
+{
+  "Metadata": {
+    "Id": {},
+    "Prepared": "2020-10-12T04:15:43Z",
+    "RunId": "runId098",
+    "RequestReference": "SRVREQ01",
+    "ConfigurationReference": "configRef_v123"
+  },
+  "diagramName": "diagram",
+  "entities": [
+    {
+      "entityID": "apiXapigateway",
+      "groupID": "api-apigateway",
+      "type": "diagrams.onprem.network.Nginx",
+      "entityName": "mockedup-integration-api-apigateway"
+    },
+    {
+      "entityID": "apiXlambda",
+      "groupID": "api-lambda",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-api-lambda"
+    },
+    {
+      "entityID": "apiXlambdaXapi",
+      "groupID": "api-lambda-api",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-api-lambda-api"
+    },
+    {
+      "entityID": "dbXdatabase",
+      "groupID": "database-database",
+      "type": "diagrams.onprem.database.Postgresql",
+      "entityName": "mockedup-integration-database-database"
+    }
+  ],
+  "relationships": [
+    {
+      "startEntityID": "apiXlambdaXapi",
+      "endEntityID": "apiXapigateway",
+      "direction": "two way"
+    },
+    {
+      "startEntityID": "apiXlambdaXapi",
+      "endEntityID": "dbXdatabase",
+      "direction": "one way"
+    }
+  ],
+  "groups": [
+    {
+      "groupID": "api-apigateway",
+      "parentID": "apigateway"
+    },
+    {
+      "groupID": "apigateway",
+      "parentID": ""
+    },
+    {
+      "groupID": "api-lambda",
+      "parentID": "lambda"
+    },
+    {
+      "groupID": "api-lambda-api",
+      "parentID": "api-lambda"
+    },
+    {
+      "groupID": "database",
+      "parentID": ""
+    },
+    {
+      "groupID": "database-database",
+      "parentID": "database"
+    },
+    {
+      "groupID": "lambda",
+      "parentID": ""
+    }
+  ]
+}

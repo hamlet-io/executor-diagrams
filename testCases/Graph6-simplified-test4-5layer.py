@@ -21,12 +21,11 @@ from diagrams.aws.storage import ElasticFileSystemEFS
 from diagrams.aws.network import CloudMap
 from diagrams.aws.integration import ConsoleMobileApplication
 
-with Diagram("Graph6-simplified", show=True, outformat="png"):
+with Diagram("Graph6-simplified-test4-5layer", show=True, outformat="png"):
     #STEP1:set up groups and entities
     with Cluster("GoSource"):
         gsIamUser = IdentityAndAccessManagementIamAWSSts("AWS IAM User")
         gsServer = TradicionalServer("MacOS Build Server")
-
     with Cluster("Internet"):
         with Cluster("Github"):
             genericSamlToken = GenericSamlToken("oAuth Authentication Provider")
@@ -44,8 +43,8 @@ with Diagram("Graph6-simplified", show=True, outformat="png"):
                 jawECS1 = ECS("ECS Container")
                 jawECS2 = ECS("ECS Container")
                 jawECS3 = ECS("ECS Container")
-            with Cluster("Shared Storage"):
-                ssEFS = ElasticFileSystemEFS("EFS FileSystem")
+                with Cluster("Shared Storage"):
+                    ssEFS = ElasticFileSystemEFS("EFS FileSystem")
 
         with Cluster("Product Accounts"):
             with Cluster("AWS Account"):
@@ -60,11 +59,11 @@ with Diagram("Graph6-simplified", show=True, outformat="png"):
                 sasECS2 = ECS("ECS Container")
                 sasECS3 = ECS("ECS Container")
                 ses = SimpleEmailServiceSes("SES Email")
-            with Cluster("Redis Cache"):
-                rcECS1 = ECS("ECS Container")
-                rcCloudmap = CloudMap("AWS CloudMap")
-            with Cluster("Sentry Artifact Store"):
-                s3 = S3("S3 Bucket")
+                with Cluster("Redis Cache"):
+                    rcECS1 = ECS("ECS Container")
+                    rcCloudmap = CloudMap("AWS CloudMap")
+                    with Cluster("Sentry Artifact Store"):
+                        s3 = S3("S3 Bucket")
             with Cluster("Sentry Database"):
                 sdRDS = RDS("Relational Database Service for Postgres")
             

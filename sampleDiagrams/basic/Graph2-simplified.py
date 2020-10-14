@@ -10,7 +10,8 @@ from diagrams.aws.engagement import SimpleEmailServiceSes
 from diagrams.aws.network import ElasticLoadBalancing
 from diagrams.aws.database import RDS, Elasticache
 
-with Diagram("Graph2-simplified", show=True, outformat="png"):
+
+with Diagram("Graph2-simplified-test123", show=True, outformat="png", direction="TB"):
     #STEP1:set up groups and entities
     with Cluster("Public"):
         with Cluster("Client"):
