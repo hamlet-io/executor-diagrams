@@ -1,12 +1,12 @@
 {
   "Metadata": {
-    "Id": {},
-    "Prepared": "2020-10-12T04:15:43Z",
+    "Id": "mockedup-integration",
+    "Prepared": "2020-10-13T06:49:34Z",
     "RunId": "runId098",
     "RequestReference": "SRVREQ01",
     "ConfigurationReference": "configRef_v123"
   },
-  "diagramName": "diagram",
+  "diagramName": "mockedup-integration",
   "entities": [
     {
       "entityID": "apiXapigateway",
@@ -34,6 +34,11 @@
     }
   ],
   "relationships": [
+    {
+      "startEntityID": "apiXapigateway",
+      "endEntityID": "apiXlambdaXapi",
+      "direction": "one way"
+    },
     {
       "startEntityID": "apiXlambdaXapi",
       "endEntityID": "apiXapigateway",

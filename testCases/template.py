@@ -6,7 +6,7 @@ from diagrams.onprem.compute import *
 from diagrams.onprem.compute import *
 from diagrams.onprem.database import *
 
-with Diagram("diagram", show=True, outformat="png", direction="TB"):
+with Diagram("mockedup-integration", show=True, outformat="png", direction="TB"):
     with Cluster("apigateway"):
         with Cluster("api-apigateway"):
             apiXapigateway=Nginx("mockedup-integration-api-apigateway")
@@ -18,5 +18,6 @@ with Diagram("diagram", show=True, outformat="png", direction="TB"):
             apiXlambda=Server("mockedup-integration-api-lambda")
             with Cluster("api-lambda-api"):
                 apiXlambdaXapi=Server("mockedup-integration-api-lambda-api")
+    apiXapigateway >> Edge() >> apiXlambdaXapi
     apiXlambdaXapi >> Edge() << apiXapigateway
     apiXlambdaXapi >> Edge() >> dbXdatabase
