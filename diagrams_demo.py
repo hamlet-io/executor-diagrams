@@ -213,4 +213,4 @@ def main(JsonPath,tempPath=r'template.py'):
 
 if __name__ == "__main__":
     #first parameter is the path for json file, second parameter is path for output template file
-    main(r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\generated_graph-1-modified.json', r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\template.py')
+    main(r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\generated_graph-2.json', r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\template.py')
