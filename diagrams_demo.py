@@ -1,5 +1,7 @@
 import json
+import click
 from jinja2 import Template
+
 
 #create group object to represent Cluster
 class group(object):
@@ -19,7 +21,7 @@ class group(object):
             if group.parentID == self.groupID and group != self:
                 self.childIDs.append(group)
 
-    #find entities of each group, store entities for group object 
+    #find entities of each group, store entities for group object
     def findEntities(self,entitiesGroup):
         for en in entitiesGroup:
             if en['groupID'] == self.groupID:
@@ -28,7 +30,7 @@ class group(object):
                 self.entities.append(en)
 
     #create Cluster template
-    def createCluster(self): 
+    def createCluster(self):
         template =Template("""\
                 with Cluster("{{groupID}}"):
                     {% for entity in entities %}
@@ -40,9 +42,12 @@ class group(object):
         return self.template
 
 #main function, input json file path and template file path
-def main(JsonPath,tempPath=r'template.py'):
+@click.command()
+@click.option('--json-path', type=click.Path(exists=True, file_okay=True, readable=True), required=True, help='The exec format document')
+@click.option('--temp-path', type=click.Path(file_okay=True, writable=True ), required=True, help='The template output file')
+def main(json_path,temp_path=r'template.py'):
     #parse json file and get diagramName, groups, entities and relationships store as dict or list
-    with open(JsonPath, 'r', encoding='utf-8') as f:
+    with open(json_path, 'r', encoding='utf-8') as f:
         dictJson = json.load(f)
         for key in dictJson.keys():
             if key == 'diagramName':
@@ -51,7 +56,7 @@ def main(JsonPath,tempPath=r'template.py'):
                 groups = dictJson[key]
             elif key == "entities":
                 entities = dictJson[key]
-            else:
+            elif key == 'relationships':
                 relationships = dictJson[key]
 
     #build all group objects and store in list
@@ -118,7 +123,7 @@ def main(JsonPath,tempPath=r'template.py'):
         if parentIDs == []:
             return 'all groups are root groups', removeDuplicates(rootGroups)
         parentIDs = removeDuplicates(parentIDs)
-        
+
         parentsList = []
         for parent in parentIDs:
             template = Template("""\n
@@ -137,29 +142,29 @@ def main(JsonPath,tempPath=r'template.py'):
         return findParents(parentsList,allObjects,rootGroups), removeDuplicates(rootGroups)
 
     #write all parent groups into template file
-    with open(tempPath, 'w+', encoding='utf-8') as f:
+    with open(temp_path, 'w+', encoding='utf-8') as f:
         for g in findParents(childGroups,groupObjects,[])[1]:
             f.write(g.template)
 
     #retrive parent groups file and remove redundant spaces. (Jinja2 template generates lots of spaces and empty lines)
-    with open(tempPath, 'r', encoding='utf-8') as f:
+    with open(temp_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         lines = [l.strip() for l in lines]
         lines = [l for l in lines if l !='']
-    
+
     #insert remaining entities if there are any
     for obj in groupObjects:
         if obj.entities!=[] and obj.childIDs!=[]:
             str = "with Cluster(\"{}\"):".format(obj.groupID)
             lines = [obj.entityStr if l==str else l for l in lines]
-    
+
     #write template in file
-    with open(tempPath, 'w+', encoding='utf-8') as f:
+    with open(temp_path, 'w+', encoding='utf-8') as f:
         for l in lines:
             f.write(l+'\n')
-    
+
     #remove redundant spaces and empty lines
-    with open(tempPath, 'r', encoding='utf-8') as f:
+    with open(temp_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         lines = [l.strip() for l in lines]
         lines = [l for l in lines if l != '']
@@ -180,7 +185,7 @@ def main(JsonPath,tempPath=r'template.py'):
                 import_libray ='from {} import *\n'.format(library)
                 import_diagrams = import_diagrams + import_libray
 
-        exe_temp=import_diagrams + '\nwith Diagram(\"{}\", show=True, outformat="png", direction="TB"):\n'.format(diagramName) 
+        exe_temp=import_diagrams + '\nwith Diagram(\"{}\", show=True, outformat="png", direction="TB"):\n'.format(diagramName)
         space ='    ' #indent
         rank = 0
         for i in range(len(lines)):
@@ -202,9 +207,9 @@ def main(JsonPath,tempPath=r'template.py'):
             elif rela['direction'] == 'two way':
                 rela_str = space + rela['startEntityID'] + ' ' + '>>'+' ' + 'Edge()' + ' ' + '<<' + ' ' + rela['endEntityID'] + '\n'
                 exe_temp = exe_temp + rela_str
-    
+
     #write exe template into file for checking
-    f = open(tempPath, 'w+', encoding='utf-8')
+    f = open(temp_path, 'w+', encoding='utf-8')
     f.write(exe_temp)
     f.close()
 
@@ -214,4 +219,4 @@ def main(JsonPath,tempPath=r'template.py'):
 #specify the json file path here:
 if __name__ == "__main__":
     #first parameter is the path for json file, second parameter is path for output template file
-    main(r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\generated_graph-2.json', r'C:\Users\lixug\Desktop\gosourceDiagrams\executor-diagrams\testCases\template.py')
+    main()
