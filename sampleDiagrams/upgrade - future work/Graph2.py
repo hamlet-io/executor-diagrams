@@ -11,7 +11,7 @@ from diagrams.aws.network import ElasticLoadBalancing
 from diagrams.aws.database import RDS, Elasticache
 
 with Diagram("Graph2", show=True, outformat="png"):
-    #STEP1:set up groups and entities
+#STEP1:set up groups and entities
     with Cluster("Public"):
         with Cluster("Client"):
             pUser = User("")
@@ -50,7 +50,7 @@ with Diagram("Graph2", show=True, outformat="png"):
     
 
 
-    #STEP2:set up relationships
+#STEP2:set up relationships
     #format entities within one group
     pUser - Edge(color="transparent") - pDevice
     bsoUser - Edge(color="transparent") - bsoDevice

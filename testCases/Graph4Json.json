@@ -1,0 +1,210 @@
+{
+    "diagramName":"Graph4-simplified",
+
+    "groups":[
+        {
+            "groupID":"Internet",
+            "parentID":""
+        },
+        {
+            "groupID":"Trusted External Parties",
+            "parentID":"Internet"
+        },
+
+        {
+            "groupID":"Dept",
+            "parentID":""
+        },
+        {
+            "groupID":"Department Staff",
+            "parentID":"Dept"
+        },
+        {
+            "groupID":"Department SAML SSO",
+            "parentID":"Dept"
+        },
+
+        {
+            "groupID":"AWS Cloud",
+            "parentID":""
+        },
+        {
+            "groupID":"Jira",
+            "parentID":"AWS Cloud"
+        },
+        {
+            "groupID":"Confluence",
+            "parentID":"AWS Cloud"
+        }
+    ],
+
+    "entities":[
+        {
+            "entityID":"tepUser",
+            "groupID":"Trusted External Parties",
+            "type":"User",
+            "entityName":""
+        },
+        {
+            "entityID":"tepDevice",
+            "groupID":"Trusted External Parties",
+            "type":"Client",
+            "entityName":""
+        },
+
+        {
+            "entityID":"dsUser",
+            "groupID":"Department Staff",
+            "type":"User",
+            "entityName":""
+        },
+        {
+            "entityID":"dsDevice",
+            "groupID":"Department Staff",
+            "type":"Client",
+            "entityName":""
+        },
+
+        {
+            "entityID":"tradicionalServer",
+            "groupID":"Department SAML SSO",
+            "type":"TradicionalServer",
+            "entityName":""
+        },
+        {
+            "entityID":"genericSamlToken",
+            "groupID":"Department SAML SSO",
+            "type":"GenericSamlToken",
+            "entityName":""
+        },
+
+        {
+            "entityID":"simpleEmailServiceSes",
+            "groupID":"AWS Cloud",
+            "type":"SimpleEmailServiceSes",
+            "entityName":"Simple Email Service"
+        },
+
+        {
+            "entityID":"jELB",
+            "groupID":"Jira",
+            "type":"ElasticLoadBalancing",
+            "entityName":"Load Balancer"
+        },
+        {
+            "entityID":"jEC2",
+            "groupID":"Jira",
+            "type":"EC2",
+            "entityName":"EC2 Instance"
+        },
+        {
+            "entityID":"jEBS",
+            "groupID":"Jira",
+            "type":"EBS",
+            "entityName":"EBS Volume"
+        },
+        {
+            "entityID":"jRDS",
+            "groupID":"Jira",
+            "type":"RDS",
+            "entityName":"Relational Database Service for Postgres"
+        },
+
+        {
+            "entityID":"cELB",
+            "groupID":"Confluence",
+            "type":"ElasticLoadBalancing",
+            "entityName":"Load Balancer"
+        },
+        {
+            "entityID":"cECS",
+            "groupID":"Confluence",
+            "type":"ECS",
+            "entityName":"EC2 Instance"
+        },
+        {
+            "entityID":"cEBS",
+            "groupID":"Confluence",
+            "type":"EBS",
+            "entityName":"EBS Volume"
+        },
+        {
+            "entityID":"cRDS",
+            "groupID":"Confluence",
+            "type":"RDS",
+            "entityName":"Relational Database Service for Postgres"
+        }
+    ],
+
+    "relationships":[
+        {
+            "startEntityID":"dsDevice",
+            "endEntityID":"tradicionalServer",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"dsDevice",
+            "endEntityID":"genericSamlToken",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"jELB",
+            "endEntityID":"jEC2",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"jEC2",
+            "endEntityID":"jRDS",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"jEC2",
+            "endEntityID":"jEBS",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"cELB",
+            "endEntityID":"cRDS",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"cECS",
+            "endEntityID":"cEBS",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"jEC2",
+            "endEntityID":"simpleEmailServiceSes",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"cECS",
+            "endEntityID":"simpleEmailServiceSes",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"tepDevice",
+            "endEntityID":"jELB",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"tepDevice",
+            "endEntityID":"cELB",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"dsDevice",
+            "endEntityID":"jELB",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"dsDevice",
+            "endEntityID":"cELB",
+            "direction":"one way"
+        }
+    ]
+}

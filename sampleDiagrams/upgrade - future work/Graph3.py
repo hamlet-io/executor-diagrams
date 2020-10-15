@@ -13,7 +13,7 @@ from diagrams.aws.analytics import ElasticsearchService
 from diagrams.aws.security import Cognito
 
 with Diagram("Graph3", show=True, outformat="png"):
-
+#STEP1:set up groups and entities
     with Cluster("Public"):
         with Cluster("Observer"):
             oUser = User("")
@@ -45,24 +45,21 @@ with Diagram("Graph3", show=True, outformat="png"):
             elasticacheForRedis = Elasticache("Elasticache for Redis")
             mdRDS = RDS("Relational Database Service for Postgres")
 
-    #format within Public
+#STEP2:set up relationships
+    #format entities within one group
     oUser - Edge(color="transparent") - oDevice
-    #format within Dept
     dsUser - Edge(color="transparent") - dsDevice
-    #format within Management App
-    elb >> Edge(style="dashed") >> maECS
-    #format within Search and Reporting
     ELS - Edge(color="transparent") - cognito
-    #format within Management Services
     msECS1 - Edge(color="transparent") - msECS2
-    msECS2 >> Edge(style="dashed") >> simpleEmailServiceSes
-    #format within Management Database
     elasticacheForRedis - Edge(color="transparent") - mdRDS
 
-    #connect between sections
-    
-    
-    
+    #connect between entities
+    #default color
+    elb >> Edge(style="dashed") >> maECS
+    msECS1 >> Edge(style="dashed") >> ELS
+    msECS1 >> Edge(style="dashed") >> elasticacheForRedis
+    msECS2 >> Edge(style="dashed") >> elasticacheForRedis
+    msECS2 >> Edge(style="dashed") >> simpleEmailServiceSes
     #gray dashed: System Processes
     oDevice >> Edge(style="dashed", label= "Mobile Devices retrieve updates \n of the mobile app") >> s3
     #orange: Submissions
@@ -72,7 +69,3 @@ with Diagram("Graph3", show=True, outformat="png"):
     #blue: Reporting
     dsDevice >> Edge(color= "#4472C4") >> elb
     dsDevice >> Edge(color="#4472C4", label= "Departmental staff generate \n reports on voyages and \n the reports provided") >> ELS 
-
-    msECS1 >> Edge(style="dashed") >> ELS
-    msECS1 >> Edge(style="dashed") >> elasticacheForRedis
-    msECS2 >> Edge(style="dashed") >> elasticacheForRedis
