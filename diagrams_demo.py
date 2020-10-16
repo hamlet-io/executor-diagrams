@@ -179,13 +179,16 @@ def main(json_path,temp_path=r'template.py'):
 
         #import libraries from entity types
         import_diagrams = "import diagrams\nfrom diagrams import Cluster, Diagram, Edge\nfrom diagrams.generic.blank import Blank\n"
+        imported_libraries = []
         for obj in groupObjects:
-            if obj.libraries != []:
-                library = obj.libraries[0].rsplit('.', 1)[0]
-                import_libray ='from {} import *\n'.format(library)
-                import_diagrams = import_diagrams + import_libray
+            for diagClass in obj.libraries:
+                library = diagClass.rsplit('.', 1)[0]
+                if library not in imported_libraries:
+                    imported_libraries.append(library)
+                    import_libray ='from {} import *\n'.format(library)
+                    import_diagrams = import_diagrams + import_libray
 
-        exe_temp=import_diagrams + '\nwith Diagram(\"{}\", show=True, outformat="png", direction="TB"):\n'.format(diagramName)
+        exe_temp=import_diagrams + '\nwith Diagram(\"{}\", show=False, outformat="png", direction="TB"):\n'.format(diagramName)
         space ='    ' #indent
         rank = 0
         for i in range(len(lines)):
