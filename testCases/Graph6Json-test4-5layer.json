@@ -1,0 +1,293 @@
+{
+    "diagramName":"Graph6-simplified-test4-5layer",
+
+    "groups":[
+        {
+            "groupID":"GoSource",
+            "parentID":""
+        },
+        {
+            "groupID":"Internet",
+            "parentID":""
+        },
+        {
+            "groupID":"AWS Cloud",
+            "parentID":""
+        },
+
+        {
+            "groupID":"Github",
+            "parentID":"Internet"
+        },
+        {
+            "groupID":"Application Developers",
+            "parentID":"Internet"
+        },
+
+        {
+            "groupID":"Jenkins CI/CD Pipeline",
+            "parentID":"AWS Cloud"
+        },
+        {
+            "groupID":"Product Accounts",
+            "parentID":"AWS Cloud"
+        },
+        {
+            "groupID":"Sentry Exception Monitoring",
+            "parentID":"AWS Cloud"
+        },
+
+        {
+            "groupID":"Jenkins Service",
+            "parentID":"Jenkins CI/CD Pipeline"
+        },
+        {
+            "groupID":"Jenkins Agent Workers",
+            "parentID":"Jenkins CI/CD Pipeline"
+        },
+        {
+            "groupID":"Shared Storage",
+            "parentID":"Jenkins Agent Workers"
+        },
+
+        {
+            "groupID":"AWS Account",
+            "parentID":"Product Accounts"
+        },
+
+        {
+            "groupID":"Sentry Application Services",
+            "parentID":"Sentry Exception Monitoring"
+        },
+        {
+            "groupID":"Redis Cache",
+            "parentID":"Sentry Application Services"
+        },
+        {
+            "groupID":"Sentry Artifact Store",
+            "parentID":"Redis Cache"
+        },
+        {
+            "groupID":"Sentry Database",
+            "parentID":"Sentry Exception Monitoring"
+        }
+    ],
+
+    "entities":[
+        {
+            "entityID":"gsIamUser",
+            "groupID":"GoSource",
+            "type":"IdentityAndAccessManagementIamAWSSts",
+            "entityName":"AWS IAM User"
+        },
+        {
+            "entityID":"gsServer",
+            "groupID":"GoSource",
+            "type":"TradicionalServer",
+            "entityName":"MacOS Build Server"
+        },
+
+        {
+            "entityID":"genericSamlToken",
+            "groupID":"Github",
+            "type":"GenericSamlToken",
+            "entityName":"oAuth Authentication Provider"
+        },
+        {
+            "entityID":"codeRepo",
+            "groupID":"Github",
+            "type":"Storage",
+            "entityName":"Code Repositories"
+        },
+
+        {
+            "entityID":"adUser",
+            "groupID":"Application Developers",
+            "type":"User",
+            "entityName":""
+        },
+
+        {
+            "entityID":"jcpELB",
+            "groupID":"Jenkins CI/CD Pipeline",
+            "type":"ElasticLoadBalancing",
+            "entityName":"Load Balancer"
+        },
+
+        {
+            "entityID":"jsECS",
+            "groupID":"Jenkins Service",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+
+        {
+            "entityID":"jawECS1",
+            "groupID":"Jenkins Agent Workers",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"jawECS2",
+            "groupID":"Jenkins Agent Workers",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"jawECS3",
+            "groupID":"Jenkins Agent Workers",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+
+        {
+            "entityID":"ssEFS",
+            "groupID":"Shared Storage",
+            "type":"ElasticFileSystemEFS",
+            "entityName":"EFS FileSystem"
+        },
+
+        {
+            "entityID":"aaCloud",
+            "groupID":"AWS Account",
+            "type":"Cloudformation",
+            "entityName":"CloudFormation"
+        },
+        {
+            "entityID":"aaCli",
+            "groupID":"AWS Account",
+            "type":"CommandLineInterface",
+            "entityName":"AWS Cli"
+        },
+        {
+            "entityID":"aaDpA",
+            "groupID":"AWS Account",
+            "type":"ConsoleMobileApplication",
+            "entityName":"Deployed Application"
+        },
+
+        {
+            "entityID":"semELB",
+            "groupID":"Sentry Exception Monitoring",
+            "type":"ElasticLoadBalancing",
+            "entityName":"Load Balancer"
+        },
+
+        {
+            "entityID":"sasECS1",
+            "groupID":"Sentry Application Services",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"sasECS2",
+            "groupID":"Sentry Application Services",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"sasECS3",
+            "groupID":"Sentry Application Services",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"ses",
+            "groupID":"Sentry Application Services",
+            "type":"SimpleEmailServiceSes",
+            "entityName":"SES Email"
+        },
+
+        {
+            "entityID":"rcECS1",
+            "groupID":"Redis Cache",
+            "type":"ECS",
+            "entityName":"ECS Container"
+        },
+        {
+            "entityID":"rcCloudmap",
+            "groupID":"Redis Cache",
+            "type":"CloudMap",
+            "entityName":"AWS CloudMap"
+        },
+
+        {
+            "entityID":"s3",
+            "groupID":"Sentry Artifact Store",
+            "type":"S3",
+            "entityName":"S3 Bucket"
+        },
+
+        {
+            "entityID":"sdRDS",
+            "groupID":"Sentry Database",
+            "type":"RDS",
+            "entityName":"Relational Database Service for Postgres"
+        }
+    ],
+
+    "relationships":[
+        {
+            "startEntityID":"gsServer",
+            "endEntityID":"jsECS",
+            "direction":"two way"
+        },
+
+        {
+            "startEntityID":"jsECS",
+            "endEntityID":"jawECS2",
+            "direction":"two way"
+        },
+
+        {
+            "startEntityID":"jcpELB",
+            "endEntityID":"jsECS",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"jawECS3",
+            "endEntityID":"aaCloud",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"codeRepo",
+            "endEntityID":"jsECS",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"adUser",
+            "endEntityID":"codeRepo",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"adUser",
+            "endEntityID":"genericSamlToken",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"adUser",
+            "endEntityID":"jcpELB",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"adUser",
+            "endEntityID":"semELB",
+            "direction":"one way"
+        },
+
+        {
+            "startEntityID":"ses",
+            "endEntityID":"adUser",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"aaDpA",
+            "endEntityID":"rcECS1",
+            "direction":"one way"
+        }
+    ]
+}

@@ -22,7 +22,7 @@ from diagrams.aws.network import CloudMap
 from diagrams.aws.integration import ConsoleMobileApplication
 
 with Diagram("Graph6", show=True, outformat="png"):
-    #STEP1:set up groups and entities
+#STEP1:set up groups and entities
     with Cluster("GoSource"):
         gsIamUser = IdentityAndAccessManagementIamAWSSts("AWS IAM User")
         gsServer = TradicionalServer("MacOS Build Server")
@@ -70,7 +70,7 @@ with Diagram("Graph6", show=True, outformat="png"):
             
 
 
-    #STEP2:set up relationships
+#STEP2:set up relationships
     #format entities within one group
     gsIamUser - Edge(color="transparent") - gsServer
     genericSamlToken - Edge(color="transparent") - codeRepo

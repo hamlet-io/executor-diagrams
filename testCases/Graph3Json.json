@@ -1,14 +1,12 @@
 {
-    "diagramName":"Graph2",
-
+    "diagramName":"Graph3-simplified",
     "groups":[
         {
             "groupID":"Public",
             "parentID":""
         },
-
         {
-            "groupID":"Client",
+            "groupID":"Observer",
             "parentID":"Public"
         },
 
@@ -16,19 +14,8 @@
             "groupID":"Dept",
             "parentID":""
         },
-
         {
-            "groupID":"Bio Security Officer",
-            "parentID":"Dept"
-        },
-
-        {
-            "groupID":"Delegated Officer",
-            "parentID":"Dept"
-        },
-
-        {
-            "groupID":"Department SAML SSO",
+            "groupID":"Department Staff",
             "parentID":"Dept"
         },
 
@@ -36,22 +23,22 @@
             "groupID":"AWS Cloud",
             "parentID":""
         },
-
-        {
-            "groupID":"Management App",
-            "parentID":"AWS Cloud"
-        },
-
-        {
-            "groupID":"Management Services",
-            "parentID":"AWS Cloud"
-        },
-
         {
             "groupID":"Mobile Updates",
             "parentID":"AWS Cloud"
         },
-
+        {
+            "groupID":"Management App",
+            "parentID":"AWS Cloud"
+        },
+        {
+            "groupID":"Search and Reporting",
+            "parentID":"AWS Cloud"
+        },
+        {
+            "groupID":"Management Services",
+            "parentID":"AWS Cloud"
+        },
         {
             "groupID":"Management Database",
             "parentID":"AWS Cloud"
@@ -60,55 +47,36 @@
 
     "entities":[
         {
-            "entityID":"pUser",
-            "groupID":"Client",
+            "entityID":"oUser",
+            "groupID":"Observer",
             "type":"User",
             "entityName":""
         },
         {
-            "entityID":"pDevice",
-            "groupID":"Client",
-            "type":"Client",
-            "entityName":""
-        },
-
-        {
-            "entityID":"bsoUser",
-            "groupID":"Bio Security Officer",
-            "type":"User",
-            "entityName":""
-        },
-        {
-            "entityID":"bsoDevice",
-            "groupID":"Bio Security Officer",
+            "entityID":"oDevice",
+            "groupID":"Observer",
             "type":"Mobile",
             "entityName":""
         },
 
         {
-            "entityID":"doUser",
-            "groupID":"Delegated Officer",
+            "entityID":"dsUser",
+            "groupID":"Department Staff",
             "type":"User",
             "entityName":""
         },
         {
-            "entityID":"doDevice",
-            "groupID":"Delegated Officer",
+            "entityID":"dsDevice",
+            "groupID":"Department Staff",
             "type":"Client",
             "entityName":""
         },
 
         {
-            "entityID":"tradicionalServer",
-            "groupID":"Department SAML SSO",
-            "type":"TradicionalServer",
-            "entityName":""
-        },
-        {
-            "entityID":"genericSamlToken",
-            "groupID":"Department SAML SSO",
-            "type":"GenericSamlToken",
-            "entityName":""
+            "entityID":"s3",
+            "groupID":"Mobile Updates",
+            "type":"S3",
+            "entityName":"S3 Bucket"
         },
 
         {
@@ -124,6 +92,18 @@
             "entityName":"ECS Container"
         },
 
+        {
+            "entityID":"ELS",
+            "groupID":"Search and Reporting",
+            "type":"ElasticsearchService",
+            "entityName":"ElasticSearch"
+        },
+        {
+            "entityID":"cognito",
+            "groupID":"Search and Reporting",
+            "type":"Cognito",
+            "entityName":"Cognito"
+        },
 
         {
             "entityID":"msECS1",
@@ -145,13 +125,6 @@
         },
 
         {
-            "entityID":"s3",
-            "groupID":"Mobile Updates",
-            "type":"S3",
-            "entityName":"S3 Bucket"
-        },
-
-        {
             "entityID":"elasticacheForRedis",
             "groupID":"Management Database",
             "type":"Elasticache",
@@ -167,81 +140,58 @@
 
     "relationships":[
         {
+            "startEntityID":"elb",
+            "endEntityID":"maECS",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"msECS1",
+            "endEntityID":"ELS",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"msECS1",
+            "endEntityID":"elasticacheForRedis",
+            "direction":"one way"
+        },
+        {
+            "startEntityID":"msECS2",
+            "endEntityID":"elasticacheForRedis",
+            "direction":"one way"
+        },
+        {
             "startEntityID":"msECS2",
             "endEntityID":"simpleEmailServiceSes",
             "direction":"one way"
         },
 
         {
-            "startEntityID":"elb",
-            "endEntityID":"maECS",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"pDevice",
-            "endEntityID":"elb",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"bsoDevice",
-            "endEntityID":"elb",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"doUser",
-            "endEntityID":"tradicionalServer",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"doDevice",
-            "endEntityID":"elb",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"bsoDevice",
+            "startEntityID":"oDevice",
             "endEntityID":"s3",
             "direction":"one way"
         },
-
         {
-            "startEntityID":"maECS",
-            "endEntityID":"elasticacheForRedis",
+            "startEntityID":"oDevice",
+            "endEntityID":"elb",
             "direction":"one way"
         },
 
         {
-            "startEntityID":"maECS1",
-            "endEntityID":"elasticacheForRedis",
+            "startEntityID":"dsDevice",
+            "endEntityID":"elb",
             "direction":"one way"
         },
-
         {
-            "startEntityID":"maECS2",
-            "endEntityID":"elasticacheForRedis",
+            "startEntityID":"dsDevice",
+            "endEntityID":"elb",
             "direction":"one way"
         },
-
         {
-            "startEntityID":"maECS1",
-            "endEntityID":"pDevice",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"maECS1",
-            "endEntityID":"bsoDevice",
-            "direction":"one way"
-        },
-
-        {
-            "startEntityID":"maECS1",
-            "endEntityID":"doDevice",
+            "startEntityID":"dsDevice",
+            "endEntityID":"ELS",
             "direction":"one way"
         }
+      
     ]
+
 }

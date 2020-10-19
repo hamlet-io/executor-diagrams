@@ -1,0 +1,316 @@
+{
+  "diagramName":"Graph-testing123",
+  "Metadata": {
+    "Id": {},
+    "Prepared": "2020-10-07T07:48:36Z",
+    "RunId": "runId098",
+    "RequestReference": "SRVREQ01",
+    "ConfigurationReference": "configRef_v123"
+  },
+  "entities": [
+    {
+      "entityID": "blank1",
+      "groupID": "management-nat-default",
+      "type": "diagrams.generic.blank.Blank",
+      "entityName": "#Blank#"
+    },
+    {
+      "entityID": "blank2",
+      "groupID": "management-igw-default",
+      "type": "diagrams.generic.blank.Blank",
+      "entityName": "#Blank#"
+    },
+
+
+
+
+    {
+      "entityID": "appXapigatewaybase",
+      "groupID": "application-apigatewaybase",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-application-apigatewaybase"
+    },
+    {
+      "entityID": "appXfiletransferbase",
+      "groupID": "application-filetransferbase",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-application-filetransferbase"
+    },
+    {
+      "entityID": "appXs3base",
+      "groupID": "application-s3base",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-application-s3base"
+    },
+    {
+      "entityID": "dbXpostgresdbbase",
+      "groupID": "database-postgresdbbase",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-database-postgresdbbase"
+    },
+    {
+      "entityID": "dbXpostgresdbgenerated",
+      "groupID": "database-postgresdbgenerated",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-database-postgresdbgenerated"
+    },
+    {
+      "entityID": "elbXhttpslb",
+      "groupID": "elb-httpslb",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-elb-httpslb"
+    },
+    {
+      "entityID": "elbXhttpslbXhttpredirect",
+      "groupID": "elb-httpslb-httpredirect",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-elb-httpslb-httpredirect"
+    },
+    {
+      "entityID": "elbXhttpslbXhttps",
+      "groupID": "elb-httpslb-https",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-elb-httpslb-https"
+    },
+    {
+      "entityID": "mgmtXbaseline",
+      "groupID": "management-baseline",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline"
+    },
+    {
+      "entityID": "mgmtXbaselineXappdata",
+      "groupID": "management-baseline-appdata",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline-appdata"
+    },
+    {
+      "entityID": "mgmtXbaselineXcmk",
+      "groupID": "management-baseline-cmk",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline-cmk"
+    },
+    {
+      "entityID": "mgmtXbaselineXoai",
+      "groupID": "management-baseline-oai",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline-oai"
+    },
+    {
+      "entityID": "mgmtXbaselineXopsdata",
+      "groupID": "management-baseline-opsdata",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline-opsdata"
+    },
+    {
+      "entityID": "mgmtXbaselineXssh",
+      "groupID": "management-baseline-ssh",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-baseline-ssh"
+    },
+    {
+      "entityID": "mgmtXigw",
+      "groupID": "management-igw",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-igw"
+    },
+    {
+      "entityID": "mgmtXnat",
+      "groupID": "management-nat",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-nat"
+    },
+    {
+      "entityID": "mgmtXssh",
+      "groupID": "management-ssh",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-ssh"
+    },
+    {
+      "entityID": "mgmtXvpc",
+      "groupID": "management-vpc",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpc"
+    },
+    {
+      "entityID": "mgmtXvpcendpoint",
+      "groupID": "management-vpcendpoint",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpcendpoint"
+    },
+    {
+      "entityID": "mgmtXvpcendpointXdefault",
+      "groupID": "management-vpcendpoint-default",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpcendpoint-default"
+    },
+    {
+      "entityID": "mgmtXvpcXexternal",
+      "groupID": "management-vpc-external",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpc-external"
+    },
+    {
+      "entityID": "mgmtXvpcXinternal",
+      "groupID": "management-vpc-internal",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpc-internal"
+    },
+    {
+      "entityID": "mgmtXvpcXopen",
+      "groupID": "management-vpc-open",
+      "type": "diagrams.onprem.compute.Server",
+      "entityName": "mockedup-integration-management-vpc-open"
+    }
+  ],
+  "groups": [
+    {
+      "groupID": "apigatewaybase",
+      "parentID": ""
+    },
+    {
+      "groupID": "application-apigatewaybase",
+      "parentID": "apigatewaybase"
+    },
+    {
+      "groupID": "application-filetransferbase",
+      "parentID": "filetransferbase"
+    },
+    {
+      "groupID": "application-s3base",
+      "parentID": "s3base"
+    },
+    {
+      "groupID": "baseline",
+      "parentID": ""
+    },
+    {
+      "groupID": "database-postgresdbbase",
+      "parentID": "postgresdbbase"
+    },
+    {
+      "groupID": "database-postgresdbgenerated",
+      "parentID": "postgresdbgenerated"
+    },
+    {
+      "groupID": "elb-httpslb",
+      "parentID": "httpslb"
+    },
+    {
+      "groupID": "elb-httpslb-httpredirect",
+      "parentID": "elb-httpslb"
+    },
+    {
+      "groupID": "elb-httpslb-https",
+      "parentID": "elb-httpslb"
+    },
+    {
+      "groupID": "filetransferbase",
+      "parentID": ""
+    },
+    {
+      "groupID": "httpslb",
+      "parentID": ""
+    },
+    {
+      "groupID": "igw",
+      "parentID": ""
+    },
+    {
+      "groupID": "management-baseline",
+      "parentID": "baseline"
+    },
+    {
+      "groupID": "management-baseline-appdata",
+      "parentID": "management-baseline"
+    },
+    {
+      "groupID": "management-baseline-cmk",
+      "parentID": "management-baseline"
+    },
+    {
+      "groupID": "management-baseline-oai",
+      "parentID": "management-baseline"
+    },
+    {
+      "groupID": "management-baseline-opsdata",
+      "parentID": "management-baseline"
+    },
+    {
+      "groupID": "management-baseline-ssh",
+      "parentID": "management-baseline"
+    },
+    {
+      "groupID": "management-igw",
+      "parentID": "igw"
+    },
+    {
+      "groupID": "management-igw-default",
+      "parentID": "management-igw"
+    },
+    {
+      "groupID": "management-nat",
+      "parentID": "nat"
+    },
+    {
+      "groupID": "management-nat-default",
+      "parentID": "management-nat"
+    },
+    {
+      "groupID": "management-ssh",
+      "parentID": "ssh"
+    },
+    {
+      "groupID": "management-vpc",
+      "parentID": "vpc"
+    },
+    {
+      "groupID": "management-vpcendpoint",
+      "parentID": "vpcendpoint"
+    },
+    {
+      "groupID": "management-vpcendpoint-default",
+      "parentID": "management-vpcendpoint"
+    },
+    {
+      "groupID": "management-vpc-external",
+      "parentID": "management-vpc"
+    },
+    {
+      "groupID": "management-vpc-internal",
+      "parentID": "management-vpc"
+    },
+    {
+      "groupID": "management-vpc-open",
+      "parentID": "management-vpc"
+    },
+    {
+      "groupID": "nat",
+      "parentID": ""
+    },
+    {
+      "groupID": "postgresdbbase",
+      "parentID": ""
+    },
+    {
+      "groupID": "postgresdbgenerated",
+      "parentID": ""
+    },
+    {
+      "groupID": "s3base",
+      "parentID": ""
+    },
+    {
+      "groupID": "ssh",
+      "parentID": ""
+    },
+    {
+      "groupID": "vpc",
+      "parentID": ""
+    },
+    {
+      "groupID": "vpcendpoint",
+      "parentID": ""
+    }
+  ]
+}
