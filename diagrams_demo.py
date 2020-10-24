@@ -26,7 +26,7 @@ class group(object):
         for en in entitiesGroup:
             if en['groupID'] == self.groupID:
                 self.libraries.append(en['type']) #save for library import
-                en['type'] = en['type'].split('.')[-1] #retrieve the last word as type
+                en['type'] = en['type'].rsplit('.')[-3] + '_' + en['type'].rsplit('.')[-2] + '.' + en['type'].split('.')[-1]
                 self.entities.append(en)
 
     #create Cluster template
@@ -182,11 +182,12 @@ def main(json_path,temp_path=r'template.py'):
         imported_libraries = []
         for obj in groupObjects:
             for diagClass in obj.libraries:
-                library = diagClass.rsplit('.', 1)[0]
-                if library not in imported_libraries:
-                    imported_libraries.append(library)
-                    import_libray ='from {} import *\n'.format(library)
-                    import_diagrams = import_diagrams + import_libray
+                import_module = diagClass.rsplit('.', 1)[0]
+                if import_module not in imported_libraries:
+                    imported_libraries.append(import_module)
+                    import_name = diagClass.rsplit('.')[1] + '_' + diagClass.rsplit('.')[2]
+                    import_command = f'import {import_module} as {import_name} \n'
+                    import_diagrams = import_diagrams + import_command
 
         exe_temp=import_diagrams + '\nwith Diagram(\"{}\", show=False, outformat="png", direction="TB"):\n'.format(diagramName)
         space ='    ' #indent
