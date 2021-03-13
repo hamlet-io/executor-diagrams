@@ -1,7 +1,12 @@
 # executor-diagrams
 
+## End of Life
+
 **This repo has now been archived**
+
 **Digram generation is now part of https://github.com/hamlet-io/executor-python**
+
+## Introduction
 
 This is an executor for generating solution level digrams from hamlet.
 It can convert a JSON file in a predefined structure into PNG diagram directly and in the meanwhile generate a template.py file that records the codes used to produce the diagram.
